@@ -104,20 +104,6 @@ int main(void)
   LCD_SendData(0xF6);
 
   HAL_Delay(100);
-  LCD_SendData(0x50);
-
-  HAL_Delay(100);
-  LCD_SendData(0x86);
-  HAL_Delay(100);
-  LCD_SendData(0x56);
-  HAL_Delay(100);
-  LCD_SendData(0xC6);
-  HAL_Delay(100);
-  LCD_SendData(0xC6);
-  HAL_Delay(100);
-  LCD_SendData(0xF6);
-
-  HAL_Delay(100);
   LCD_SendCmd(0x08);
 
 
