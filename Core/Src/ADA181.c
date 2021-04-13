@@ -50,7 +50,7 @@ void LCD_Pulse(void) {
 	HAL_Delay(1);
 }
 
-void LCD_SendCmd(uint8_t c) {
+void LCD_SendCmd(char c) {
 
 	// RS: 0 = command, 1 = data
 	LCD_Port->ODR &= ~(1<<LCD_RS);
@@ -67,7 +67,7 @@ void LCD_SendCmd(uint8_t c) {
 	LCD_Port->ODR |= 1<<LCD_RS;
 }
 
-void LCD_SendData(uint8_t c) {
+void LCD_SendData(char c) {
 
 	// RS defaults to 1
 	// No need to change RS
@@ -106,3 +106,8 @@ void LCD_Init(void) {
 	HAL_Delay(5);
 
 }
+
+void LCD_SendString (char *str) {
+	while (*str) LCD_SendData(*str++);
+}
+

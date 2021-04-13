@@ -96,37 +96,7 @@ int main(void)
   LCD_SendCmd(0x01);
 
   // Send Hello
-  LCD_SendData(0x48);
-  LCD_SendData(0x65);
-  LCD_SendData(0x6C);
-  LCD_SendData(0x6C);
-  LCD_SendData(0x6F);
-
-  LCD_SendData(0x20);
-
-  // Send my
-  LCD_SendData(0x6D);
-  LCD_SendData(0x79);
-
-  LCD_SendData(0x20);
-
-  // Send little
-  LCD_SendData(0x6C);
-  LCD_SendData(0x69);
-  LCD_SendData(0x74);
-  LCD_SendData(0x74);
-  LCD_SendData(0x6C);
-  LCD_SendData(0x65);
-
-  LCD_SendCmd(0xC0);
-
-  // Send friend
-  LCD_SendData(0x66);
-  LCD_SendData(0x72);
-  LCD_SendData(0x69);
-  LCD_SendData(0x65);
-  LCD_SendData(0x6E);
-  LCD_SendData(0x64);
+  LCD_SendString("EMBEDDED LCD!");
 
   // Select CG-RAM and set address to 0x00
   LCD_SendCmd(0x40 + 0x00);
@@ -143,7 +113,7 @@ int main(void)
   LCD_SendData(0x00);
 
   // Select display RAM & set address to 0
-  LCD_SendCmd(0xC7);
+  LCD_SendCmd(0x8E);
   HAL_Delay(4);
 
   // Display smile face

@@ -10,8 +10,9 @@
 
 void LCD_PutNibble(uint8_t);
 void LCD_Pulse(void);
-void LCD_SendCmd(uint8_t);
-void LCD_SendData(uint8_t);
+void LCD_SendCmd(char);
+void LCD_SendData(char);
 void LCD_Init(void);
+void LCD_SendString(char*);
 
 #endif /* INC_ADA181_H_ */

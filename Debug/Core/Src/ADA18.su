@@ -1,5 +1,0 @@
-ADA18.c:21:6:LCD_PutNibble	16	static
-ADA18.c:45:6:LCD_Pulse	8	static
-ADA18.c:53:6:LCD_SendCmd	16	static
-ADA18.c:70:6:LCD_SendData	16	static
-ADA18.c:85:6:LCD_Init	8	static
