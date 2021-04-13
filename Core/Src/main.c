@@ -97,55 +97,57 @@ int main(void)
 
   // Send Hello
   LCD_SendData(0x48);
-  HAL_Delay(500);
   LCD_SendData(0x65);
-  HAL_Delay(500);
   LCD_SendData(0x6C);
-  HAL_Delay(500);
   LCD_SendData(0x6C);
-  HAL_Delay(500);
   LCD_SendData(0x6F);
-  HAL_Delay(3000);
 
   LCD_SendData(0x20);
 
   // Send my
   LCD_SendData(0x6D);
-  HAL_Delay(500);
   LCD_SendData(0x79);
-  HAL_Delay(500);
 
   LCD_SendData(0x20);
 
   // Send little
   LCD_SendData(0x6C);
-  HAL_Delay(500);
   LCD_SendData(0x69);
-  HAL_Delay(500);
   LCD_SendData(0x74);
-  HAL_Delay(500);
   LCD_SendData(0x74);
-  HAL_Delay(500);
   LCD_SendData(0x6C);
-  HAL_Delay(500);
   LCD_SendData(0x65);
-  HAL_Delay(500);
 
   LCD_SendCmd(0xC0);
 
   // Send friend
   LCD_SendData(0x66);
-  HAL_Delay(500);
   LCD_SendData(0x72);
-  HAL_Delay(500);
   LCD_SendData(0x69);
-  HAL_Delay(500);
   LCD_SendData(0x65);
-  HAL_Delay(500);
   LCD_SendData(0x6E);
-  HAL_Delay(500);
   LCD_SendData(0x64);
-  HAL_Delay(500);
+
+  // Select CG-RAM and set address to 0x00
+  LCD_SendCmd(0x40 + 0x00);
+  HAL_Delay(4);
+
+  // Define smile face
+  LCD_SendData(0x00);
+  LCD_SendData(0x0A);
+  LCD_SendData(0x0A);
+  LCD_SendData(0x0A);
+  LCD_SendData(0x00);
+  LCD_SendData(0x11);
+  LCD_SendData(0x0E);
+  LCD_SendData(0x00);
+
+  // Select display RAM & set address to 0
+  LCD_SendCmd(0xC7);
+  HAL_Delay(4);
+
+  // Display smile face
+  LCD_SendData(0x00);
 
   LCD_SendCmd(0x0C);
 
