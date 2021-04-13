@@ -91,21 +91,63 @@ int main(void)
   MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
   LCD_Init();
-  LCD_SendData(0x86);
-  HAL_Delay(100);
-  LCD_SendData(0x86);
-  HAL_Delay(100);
-  LCD_SendData(0x56);
-  HAL_Delay(100);
-  LCD_SendData(0xC6);
-  HAL_Delay(100);
-  LCD_SendData(0xC6);
-  HAL_Delay(100);
-  LCD_SendData(0xF6);
+  LCD_Pulse();
 
-  HAL_Delay(100);
-  LCD_SendCmd(0x08);
+  LCD_SendCmd(0x01);
 
+  // Send Hello
+  LCD_SendData(0x48);
+  HAL_Delay(500);
+  LCD_SendData(0x65);
+  HAL_Delay(500);
+  LCD_SendData(0x6C);
+  HAL_Delay(500);
+  LCD_SendData(0x6C);
+  HAL_Delay(500);
+  LCD_SendData(0x6F);
+  HAL_Delay(3000);
+
+  LCD_SendData(0x20);
+
+  // Send my
+  LCD_SendData(0x6D);
+  HAL_Delay(500);
+  LCD_SendData(0x79);
+  HAL_Delay(500);
+
+  LCD_SendData(0x20);
+
+  // Send little
+  LCD_SendData(0x6C);
+  HAL_Delay(500);
+  LCD_SendData(0x69);
+  HAL_Delay(500);
+  LCD_SendData(0x74);
+  HAL_Delay(500);
+  LCD_SendData(0x74);
+  HAL_Delay(500);
+  LCD_SendData(0x6C);
+  HAL_Delay(500);
+  LCD_SendData(0x65);
+  HAL_Delay(500);
+
+  LCD_SendCmd(0xC0);
+
+  // Send friend
+  LCD_SendData(0x66);
+  HAL_Delay(500);
+  LCD_SendData(0x72);
+  HAL_Delay(500);
+  LCD_SendData(0x69);
+  HAL_Delay(500);
+  LCD_SendData(0x65);
+  HAL_Delay(500);
+  LCD_SendData(0x6E);
+  HAL_Delay(500);
+  LCD_SendData(0x64);
+  HAL_Delay(500);
+
+  LCD_SendCmd(0x0C);
 
   /* USER CODE END 2 */
 

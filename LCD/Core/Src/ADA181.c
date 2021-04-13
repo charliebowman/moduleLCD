@@ -20,22 +20,22 @@
 
 void LCD_PutNibble(uint8_t c) {
 
-	if (c & 0x8)
+	if (c & 0x08)
 		LCD_Port->ODR |= 1<<LCD_D7;
 	else
 		LCD_Port->ODR &= ~(1<<LCD_D7);
 
-	if (c & 0x4)
+	if (c & 0x04)
 		LCD_Port->ODR |= 1<<LCD_D6;
 	else
 		LCD_Port->ODR &= ~(1<<LCD_D6);
 
-	if (c & 0x2)
+	if (c & 0x02)
 		LCD_Port->ODR |= 1<<LCD_D5;
 	else
 		LCD_Port->ODR &= ~(1<<LCD_D5);
 
-	if (c & 0x1)
+	if (c & 0x01)
 		LCD_Port->ODR |= 1<<LCD_D4;
 	else
 		LCD_Port->ODR &= ~(1<<LCD_D4);
@@ -45,9 +45,9 @@ void LCD_PutNibble(uint8_t c) {
 void LCD_Pulse(void) {
 
 	LCD_Port->ODR |= 1<<LCD_EN;
-	HAL_Delay(4);
+	HAL_Delay(1);
 	LCD_Port->ODR &= ~(1<<LCD_EN);
-	HAL_Delay(4);
+	HAL_Delay(1);
 }
 
 void LCD_SendCmd(uint8_t c) {
@@ -60,7 +60,7 @@ void LCD_SendCmd(uint8_t c) {
 	LCD_Pulse();
 
 	// Send Lower 4 bits
-	LCD_PutNibble( c & 0xF );
+	LCD_PutNibble( c & 0x0F );
 	LCD_Pulse();
 
 	// Return to default
@@ -77,8 +77,9 @@ void LCD_SendData(uint8_t c) {
 	LCD_Pulse();
 
 	// Send Lower 4 bits
-	LCD_PutNibble( c & 0xF );
+	LCD_PutNibble( c & 0x0F );
 	LCD_Pulse();
+
 
 }
 
@@ -88,20 +89,20 @@ void LCD_Init(void) {
 	LCD_SendCmd(0x30);
 	HAL_Delay(5);
 	LCD_SendCmd(0x30);
-	HAL_Delay(1);
+	HAL_Delay(5);
 	LCD_SendCmd(0x30);
 
 	// 4 bit mode
-	HAL_Delay(20);
+	HAL_Delay(5);
 	LCD_SendCmd(0x20);
-	HAL_Delay(20);
+	HAL_Delay(5);
 	LCD_SendCmd(0x2C);
-	HAL_Delay(20);
+	HAL_Delay(5);
 	LCD_SendCmd(0x08);
-	HAL_Delay(20);
+	HAL_Delay(5);
 	LCD_SendCmd(0x01);
-	HAL_Delay(20);
+	HAL_Delay(5);
 	LCD_SendCmd(0x06);
-	HAL_Delay(1000);
+	HAL_Delay(5);
 
 }
