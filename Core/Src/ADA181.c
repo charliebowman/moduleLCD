@@ -45,9 +45,9 @@ void LCD_PutNibble(uint8_t c) {
 void LCD_Pulse(void) {
 
 	LCD_Port->ODR |= 1<<LCD_EN;
-	HAL_Delay(1);
+	HAL_Delay(4);
 	LCD_Port->ODR &= ~(1<<LCD_EN);
-	HAL_Delay(1);
+	HAL_Delay(4);
 }
 
 void LCD_SendCmd(char c) {
@@ -85,17 +85,33 @@ void LCD_SendData(char c) {
 
 void LCD_Init(void) {
 
-	HAL_Delay(20);
-	LCD_SendCmd(0x30);
+	HAL_Delay(50);
+	GPIOA->ODR |= 1 << 5;
+	GPIOA->ODR |= 1 << 6;
+	LCD_Pulse();
+	GPIOA->ODR &= ~( 1<< 5);
+	GPIOA->ODR &= ~( 1<< 6);
 	HAL_Delay(5);
-	LCD_SendCmd(0x30);
-	HAL_Delay(5);
-	LCD_SendCmd(0x30);
+	GPIOA->ODR |= 1 << 5;
+	GPIOA->ODR |= 1 << 6;
+	LCD_Pulse();
+	GPIOA->ODR &= ~( 1<< 5);
+	GPIOA->ODR &= ~( 1<< 6);
+	HAL_Delay(1);
+	GPIOA->ODR |= 1 << 5;
+	GPIOA->ODR |= 1 << 6;
+	LCD_Pulse();
+	GPIOA->ODR &= ~( 1<< 5);
+	GPIOA->ODR &= ~( 1<< 6);
 
 	// 4 bit mode
-	HAL_Delay(5);
-	LCD_SendCmd(0x20);
-	HAL_Delay(5);
+	HAL_Delay(1);
+	GPIOA->ODR |= 1 << 6;
+	LCD_Pulse();
+	GPIOA->ODR &= ~( 1<< 6);
+
+	// Initialisation
+	HAL_Delay(1);
 	LCD_SendCmd(0x2C);
 	HAL_Delay(5);
 	LCD_SendCmd(0x08);

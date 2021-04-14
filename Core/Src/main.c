@@ -91,12 +91,11 @@ int main(void)
   MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
   LCD_Init();
-  LCD_Pulse();
 
-  LCD_SendCmd(0x01);
+  // LCD_Pulse();
 
   // Send Hello
-  LCD_SendString("EMBEDDED LCD!");
+  LCD_SendString("IT WORKED!");
 
   // Select CG-RAM and set address to 0x00
   LCD_SendCmd(0x40 + 0x00);
