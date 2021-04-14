@@ -3,3 +3,4 @@ ADA181.c:45:6:LCD_Pulse	8	static
 ADA181.c:53:6:LCD_SendCmd	16	static
 ADA181.c:70:6:LCD_SendData	16	static
 ADA181.c:86:6:LCD_Init	8	static
+ADA181.c:129:6:LCD_SendString	16	static
