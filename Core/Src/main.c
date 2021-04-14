@@ -92,7 +92,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
   LCD_Init();
 
-  LCD_SendString("EMBEDDED LCD");
+  LCD_SendString("HELLO MUM");
 
   // Select CG-RAM and set address to 0x00
   LCD_SendCmd(0x40 + 0x00);
@@ -109,11 +109,16 @@ int main(void)
   LCD_SendData(0x00);
 
   // Select display RAM & set address to 0
-  LCD_SendCmd(0x8D);
+  LCD_SendCmd(0x8A);
   HAL_Delay(4);
 
   // Display smile face
   LCD_SendData(0x00);
+
+  HAL_Delay(3000);
+
+  LCD_SendCmd(0x01);
+  LCD_SendString("I LOVE YOU");
 
   /* USER CODE END 2 */
 
