@@ -7,29 +7,29 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
   1 .text         00001ef8  0800018c  0800018c  0001018c  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .rodata       0000004c  08002084  08002084  00012084  2**2
+  2 .rodata       00000050  08002084  08002084  00012084  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  3 .ARM.extab    00000000  080020d0  080020d0  0002000c  2**0
+  3 .ARM.extab    00000000  080020d4  080020d4  0002000c  2**0
                   CONTENTS
-  4 .ARM          00000000  080020d0  080020d0  0002000c  2**0
+  4 .ARM          00000000  080020d4  080020d4  0002000c  2**0
                   CONTENTS
-  5 .preinit_array 00000000  080020d0  080020d0  0002000c  2**0
+  5 .preinit_array 00000000  080020d4  080020d4  0002000c  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  6 .init_array   00000004  080020d0  080020d0  000120d0  2**2
+  6 .init_array   00000004  080020d4  080020d4  000120d4  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  7 .fini_array   00000004  080020d4  080020d4  000120d4  2**2
+  7 .fini_array   00000004  080020d8  080020d8  000120d8  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  8 .data         0000000c  20000000  080020d8  00020000  2**2
+  8 .data         0000000c  20000000  080020dc  00020000  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  9 .bss          0000006c  2000000c  080020e4  0002000c  2**2
+  9 .bss          0000006c  2000000c  080020e8  0002000c  2**2
                   ALLOC
- 10 ._user_heap_stack 00000600  20000078  080020e4  00020078  2**0
+ 10 ._user_heap_stack 00000600  20000078  080020e8  00020078  2**0
                   ALLOC
  11 .ARM.attributes 00000030  00000000  00000000  0002000c  2**0
                   CONTENTS, READONLY
- 12 .debug_info   0000ad87  00000000  00000000  0002003c  2**0
+ 12 .debug_info   0000ad86  00000000  00000000  0002003c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 000017ea  00000000  00000000  0002adc3  2**0
+ 13 .debug_abbrev 000017ea  00000000  00000000  0002adc2  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  14 .debug_aranges 00000af0  00000000  00000000  0002c5b0  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
@@ -437,137 +437,135 @@ void LCD_Init(void) {
  800048a:	2005      	movs	r0, #5
  800048c:	f000 fa62 	bl	8000954 <HAL_Delay>
 
-}
- 8000490:	bf00      	nop
- 8000492:	bd80      	pop	{r7, pc}
+	// Turn display on
+	LCD_SendCmd(0x0C);
+ 8000490:	200c      	movs	r0, #12
+ 8000492:	f7ff ff18 	bl	80002c6 <LCD_SendCmd>
 
-08000494 <LCD_SendString>:
+}
+ 8000496:	bf00      	nop
+ 8000498:	bd80      	pop	{r7, pc}
+
+0800049a <LCD_SendString>:
 
 void LCD_SendString (char *str) {
- 8000494:	b580      	push	{r7, lr}
- 8000496:	b082      	sub	sp, #8
- 8000498:	af00      	add	r7, sp, #0
- 800049a:	6078      	str	r0, [r7, #4]
+ 800049a:	b580      	push	{r7, lr}
+ 800049c:	b082      	sub	sp, #8
+ 800049e:	af00      	add	r7, sp, #0
+ 80004a0:	6078      	str	r0, [r7, #4]
 	while (*str) LCD_SendData(*str++);
- 800049c:	e006      	b.n	80004ac <LCD_SendString+0x18>
- 800049e:	687b      	ldr	r3, [r7, #4]
- 80004a0:	1c5a      	adds	r2, r3, #1
- 80004a2:	607a      	str	r2, [r7, #4]
- 80004a4:	781b      	ldrb	r3, [r3, #0]
- 80004a6:	4618      	mov	r0, r3
- 80004a8:	f7ff ff37 	bl	800031a <LCD_SendData>
- 80004ac:	687b      	ldr	r3, [r7, #4]
- 80004ae:	781b      	ldrb	r3, [r3, #0]
- 80004b0:	2b00      	cmp	r3, #0
- 80004b2:	d1f4      	bne.n	800049e <LCD_SendString+0xa>
+ 80004a2:	e006      	b.n	80004b2 <LCD_SendString+0x18>
+ 80004a4:	687b      	ldr	r3, [r7, #4]
+ 80004a6:	1c5a      	adds	r2, r3, #1
+ 80004a8:	607a      	str	r2, [r7, #4]
+ 80004aa:	781b      	ldrb	r3, [r3, #0]
+ 80004ac:	4618      	mov	r0, r3
+ 80004ae:	f7ff ff34 	bl	800031a <LCD_SendData>
+ 80004b2:	687b      	ldr	r3, [r7, #4]
+ 80004b4:	781b      	ldrb	r3, [r3, #0]
+ 80004b6:	2b00      	cmp	r3, #0
+ 80004b8:	d1f4      	bne.n	80004a4 <LCD_SendString+0xa>
 }
- 80004b4:	bf00      	nop
- 80004b6:	bf00      	nop
- 80004b8:	3708      	adds	r7, #8
- 80004ba:	46bd      	mov	sp, r7
- 80004bc:	bd80      	pop	{r7, pc}
-	...
+ 80004ba:	bf00      	nop
+ 80004bc:	bf00      	nop
+ 80004be:	3708      	adds	r7, #8
+ 80004c0:	46bd      	mov	sp, r7
+ 80004c2:	bd80      	pop	{r7, pc}
 
-080004c0 <main>:
+080004c4 <main>:
 /**
   * @brief  The application entry point.
   * @retval int
   */
 int main(void)
 {
- 80004c0:	b580      	push	{r7, lr}
- 80004c2:	af00      	add	r7, sp, #0
+ 80004c4:	b580      	push	{r7, lr}
+ 80004c6:	af00      	add	r7, sp, #0
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
- 80004c4:	f000 f9d1 	bl	800086a <HAL_Init>
+ 80004c8:	f000 f9cf 	bl	800086a <HAL_Init>
   /* USER CODE BEGIN Init */
 
   /* USER CODE END Init */
 
   /* Configure the system clock */
   SystemClock_Config();
- 80004c8:	f000 f836 	bl	8000538 <SystemClock_Config>
+ 80004cc:	f000 f834 	bl	8000538 <SystemClock_Config>
   /* USER CODE BEGIN SysInit */
 
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
- 80004cc:	f000 f8ce 	bl	800066c <MX_GPIO_Init>
+ 80004d0:	f000 f8cc 	bl	800066c <MX_GPIO_Init>
   MX_TIM1_Init();
- 80004d0:	f000 f878 	bl	80005c4 <MX_TIM1_Init>
+ 80004d4:	f000 f876 	bl	80005c4 <MX_TIM1_Init>
   /* USER CODE BEGIN 2 */
   LCD_Init();
- 80004d4:	f7ff ff3b 	bl	800034e <LCD_Init>
+ 80004d8:	f7ff ff39 	bl	800034e <LCD_Init>
 
-  // LCD_Pulse();
-
-  // Send Hello
-  LCD_SendString("IT WORKED!");
- 80004d8:	4816      	ldr	r0, [pc, #88]	; (8000534 <main+0x74>)
- 80004da:	f7ff ffdb 	bl	8000494 <LCD_SendString>
+  LCD_SendString("EMBEDDED LCD");
+ 80004dc:	4815      	ldr	r0, [pc, #84]	; (8000534 <main+0x70>)
+ 80004de:	f7ff ffdc 	bl	800049a <LCD_SendString>
 
   // Select CG-RAM and set address to 0x00
   LCD_SendCmd(0x40 + 0x00);
- 80004de:	2040      	movs	r0, #64	; 0x40
- 80004e0:	f7ff fef1 	bl	80002c6 <LCD_SendCmd>
+ 80004e2:	2040      	movs	r0, #64	; 0x40
+ 80004e4:	f7ff feef 	bl	80002c6 <LCD_SendCmd>
   HAL_Delay(4);
- 80004e4:	2004      	movs	r0, #4
- 80004e6:	f000 fa35 	bl	8000954 <HAL_Delay>
+ 80004e8:	2004      	movs	r0, #4
+ 80004ea:	f000 fa33 	bl	8000954 <HAL_Delay>
 
   // Define smile face
   LCD_SendData(0x00);
- 80004ea:	2000      	movs	r0, #0
- 80004ec:	f7ff ff15 	bl	800031a <LCD_SendData>
+ 80004ee:	2000      	movs	r0, #0
+ 80004f0:	f7ff ff13 	bl	800031a <LCD_SendData>
   LCD_SendData(0x0A);
- 80004f0:	200a      	movs	r0, #10
- 80004f2:	f7ff ff12 	bl	800031a <LCD_SendData>
+ 80004f4:	200a      	movs	r0, #10
+ 80004f6:	f7ff ff10 	bl	800031a <LCD_SendData>
   LCD_SendData(0x0A);
- 80004f6:	200a      	movs	r0, #10
- 80004f8:	f7ff ff0f 	bl	800031a <LCD_SendData>
+ 80004fa:	200a      	movs	r0, #10
+ 80004fc:	f7ff ff0d 	bl	800031a <LCD_SendData>
   LCD_SendData(0x0A);
- 80004fc:	200a      	movs	r0, #10
- 80004fe:	f7ff ff0c 	bl	800031a <LCD_SendData>
+ 8000500:	200a      	movs	r0, #10
+ 8000502:	f7ff ff0a 	bl	800031a <LCD_SendData>
   LCD_SendData(0x00);
- 8000502:	2000      	movs	r0, #0
- 8000504:	f7ff ff09 	bl	800031a <LCD_SendData>
+ 8000506:	2000      	movs	r0, #0
+ 8000508:	f7ff ff07 	bl	800031a <LCD_SendData>
   LCD_SendData(0x11);
- 8000508:	2011      	movs	r0, #17
- 800050a:	f7ff ff06 	bl	800031a <LCD_SendData>
+ 800050c:	2011      	movs	r0, #17
+ 800050e:	f7ff ff04 	bl	800031a <LCD_SendData>
   LCD_SendData(0x0E);
- 800050e:	200e      	movs	r0, #14
- 8000510:	f7ff ff03 	bl	800031a <LCD_SendData>
+ 8000512:	200e      	movs	r0, #14
+ 8000514:	f7ff ff01 	bl	800031a <LCD_SendData>
   LCD_SendData(0x00);
- 8000514:	2000      	movs	r0, #0
- 8000516:	f7ff ff00 	bl	800031a <LCD_SendData>
+ 8000518:	2000      	movs	r0, #0
+ 800051a:	f7ff fefe 	bl	800031a <LCD_SendData>
 
   // Select display RAM & set address to 0
-  LCD_SendCmd(0x8E);
- 800051a:	208e      	movs	r0, #142	; 0x8e
- 800051c:	f7ff fed3 	bl	80002c6 <LCD_SendCmd>
+  LCD_SendCmd(0x8D);
+ 800051e:	208d      	movs	r0, #141	; 0x8d
+ 8000520:	f7ff fed1 	bl	80002c6 <LCD_SendCmd>
   HAL_Delay(4);
- 8000520:	2004      	movs	r0, #4
- 8000522:	f000 fa17 	bl	8000954 <HAL_Delay>
+ 8000524:	2004      	movs	r0, #4
+ 8000526:	f000 fa15 	bl	8000954 <HAL_Delay>
 
   // Display smile face
   LCD_SendData(0x00);
- 8000526:	2000      	movs	r0, #0
- 8000528:	f7ff fef7 	bl	800031a <LCD_SendData>
-
-  LCD_SendCmd(0x0C);
- 800052c:	200c      	movs	r0, #12
- 800052e:	f7ff feca 	bl	80002c6 <LCD_SendCmd>
+ 800052a:	2000      	movs	r0, #0
+ 800052c:	f7ff fef5 	bl	800031a <LCD_SendData>
 
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
- 8000532:	e7fe      	b.n	8000532 <main+0x72>
+ 8000530:	e7fe      	b.n	8000530 <main+0x6c>
+ 8000532:	bf00      	nop
  8000534:	08002084 	.word	0x08002084
 
 08000538 <SystemClock_Config>:
@@ -1286,7 +1284,7 @@ LoopFillZerobss:
  8000846:	f001 fbe5 	bl	8002014 <__libc_init_array>
 /* Call the application's entry point.*/
 	bl	main
- 800084a:	f7ff fe39 	bl	80004c0 <main>
+ 800084a:	f7ff fe3b 	bl	80004c4 <main>
 
 0800084e <LoopForever>:
 
@@ -1296,7 +1294,7 @@ LoopForever:
   ldr   sp, =_estack    /* Set stack pointer */
  8000850:	20010000 	.word	0x20010000
 	ldr	r3, =_sidata
- 8000854:	080020d8 	.word	0x080020d8
+ 8000854:	080020dc 	.word	0x080020dc
 	ldr	r0, =_sdata
  8000858:	20000000 	.word	0x20000000
 	ldr	r3, =_edata
@@ -2962,7 +2960,7 @@ HAL_StatusTypeDef HAL_RCC_OscConfig(RCC_OscInitTypeDef  *RCC_OscInitStruct)
         while(READ_BIT(RCC->CR, RCC_CR_HSERDY) == 0U)
  80011ca:	e010      	b.n	80011ee <HAL_RCC_OscConfig+0x2ba>
  80011cc:	40021000 	.word	0x40021000
- 80011d0:	08002090 	.word	0x08002090
+ 80011d0:	08002094 	.word	0x08002094
  80011d4:	20000000 	.word	0x20000000
  80011d8:	20000004 	.word	0x20000004
         {
@@ -4308,7 +4306,7 @@ HAL_StatusTypeDef HAL_RCC_ClockConfig(RCC_ClkInitTypeDef  *RCC_ClkInitStruct, ui
  8001922:	bf00      	nop
  8001924:	40022000 	.word	0x40022000
  8001928:	40021000 	.word	0x40021000
- 800192c:	08002090 	.word	0x08002090
+ 800192c:	08002094 	.word	0x08002094
  8001930:	20000000 	.word	0x20000000
  8001934:	20000004 	.word	0x20000004
 
@@ -4513,7 +4511,7 @@ uint32_t HAL_RCC_GetSysClockFreq(void)
  8001a3c:	4770      	bx	lr
  8001a3e:	bf00      	nop
  8001a40:	40021000 	.word	0x40021000
- 8001a44:	080020a0 	.word	0x080020a0
+ 8001a44:	080020a4 	.word	0x080020a4
  8001a48:	00f42400 	.word	0x00f42400
  8001a4c:	007a1200 	.word	0x007a1200
 
@@ -5579,10 +5577,10 @@ HAL_StatusTypeDef HAL_TIMEx_MasterConfigSynchronization(TIM_HandleTypeDef *htim,
  8002046:	4798      	blx	r3
  8002048:	3601      	adds	r6, #1
  800204a:	e7f2      	b.n	8002032 <__libc_init_array+0x1e>
- 800204c:	080020d0 	.word	0x080020d0
- 8002050:	080020d0 	.word	0x080020d0
- 8002054:	080020d0 	.word	0x080020d0
- 8002058:	080020d4 	.word	0x080020d4
+ 800204c:	080020d4 	.word	0x080020d4
+ 8002050:	080020d4 	.word	0x080020d4
+ 8002054:	080020d4 	.word	0x080020d4
+ 8002058:	080020d8 	.word	0x080020d8
 
 0800205c <memset>:
  800205c:	4402      	add	r2, r0

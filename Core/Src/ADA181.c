@@ -121,6 +121,9 @@ void LCD_Init(void) {
 	LCD_SendCmd(0x06);
 	HAL_Delay(5);
 
+	// Turn display on
+	LCD_SendCmd(0x0C);
+
 }
 
 void LCD_SendString (char *str) {
