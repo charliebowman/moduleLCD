@@ -92,7 +92,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
   LCD_Init();
 
-  LCD_SendString("EMBEDDED LCD");
+  LCD_SendString("EMBEDDED PROJECT");
 
   // Select CG-RAM and set address to 0x00
   LCD_SendCmd(0x40 + 0x00);
@@ -118,7 +118,7 @@ int main(void)
   HAL_Delay(3000);
 
   LCD_SendCmd(0x01);
-  LCD_SendString("PROJECT");
+  LCD_SendString("LCD SCREEN!");
 
   /* USER CODE END 2 */
 

@@ -7,23 +7,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
   1 .text         00001f08  0800018c  0800018c  0001018c  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .rodata       00000058  08002094  08002094  00012094  2**2
+  2 .rodata       00000060  08002094  08002094  00012094  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  3 .ARM.extab    00000000  080020ec  080020ec  0002000c  2**0
+  3 .ARM.extab    00000000  080020f4  080020f4  0002000c  2**0
                   CONTENTS
-  4 .ARM          00000000  080020ec  080020ec  0002000c  2**0
+  4 .ARM          00000000  080020f4  080020f4  0002000c  2**0
                   CONTENTS
-  5 .preinit_array 00000000  080020ec  080020ec  0002000c  2**0
+  5 .preinit_array 00000000  080020f4  080020f4  0002000c  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  6 .init_array   00000004  080020ec  080020ec  000120ec  2**2
+  6 .init_array   00000004  080020f4  080020f4  000120f4  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  7 .fini_array   00000004  080020f0  080020f0  000120f0  2**2
+  7 .fini_array   00000004  080020f8  080020f8  000120f8  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  8 .data         0000000c  20000000  080020f4  00020000  2**2
+  8 .data         0000000c  20000000  080020fc  00020000  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  9 .bss          0000006c  2000000c  08002100  0002000c  2**2
+  9 .bss          0000006c  2000000c  08002108  0002000c  2**2
                   ALLOC
- 10 ._user_heap_stack 00000600  20000078  08002100  00020078  2**0
+ 10 ._user_heap_stack 00000600  20000078  08002108  00020078  2**0
                   ALLOC
  11 .ARM.attributes 00000030  00000000  00000000  0002000c  2**0
                   CONTENTS, READONLY
@@ -508,7 +508,7 @@ int main(void)
   LCD_Init();
  80004d8:	f7ff ff39 	bl	800034e <LCD_Init>
 
-  LCD_SendString("EMBEDDED LCD");
+  LCD_SendString("EMBEDDED PROJECT");
  80004dc:	4818      	ldr	r0, [pc, #96]	; (8000540 <main+0x7c>)
  80004de:	f7ff ffdc 	bl	800049a <LCD_SendString>
 
@@ -564,7 +564,7 @@ int main(void)
   LCD_SendCmd(0x01);
  8000532:	2001      	movs	r0, #1
  8000534:	f7ff fec7 	bl	80002c6 <LCD_SendCmd>
-  LCD_SendString("PROJECT");
+  LCD_SendString("LCD SCREEN!");
  8000538:	4802      	ldr	r0, [pc, #8]	; (8000544 <main+0x80>)
  800053a:	f7ff ffae 	bl	800049a <LCD_SendString>
 
@@ -575,7 +575,7 @@ int main(void)
   while (1)
  800053e:	e7fe      	b.n	800053e <main+0x7a>
  8000540:	08002094 	.word	0x08002094
- 8000544:	080020a4 	.word	0x080020a4
+ 8000544:	080020a8 	.word	0x080020a8
 
 08000548 <SystemClock_Config>:
 /**
@@ -1303,7 +1303,7 @@ LoopForever:
   ldr   sp, =_estack    /* Set stack pointer */
  8000860:	20010000 	.word	0x20010000
 	ldr	r3, =_sidata
- 8000864:	080020f4 	.word	0x080020f4
+ 8000864:	080020fc 	.word	0x080020fc
 	ldr	r0, =_sdata
  8000868:	20000000 	.word	0x20000000
 	ldr	r3, =_edata
@@ -2969,7 +2969,7 @@ HAL_StatusTypeDef HAL_RCC_OscConfig(RCC_OscInitTypeDef  *RCC_OscInitStruct)
         while(READ_BIT(RCC->CR, RCC_CR_HSERDY) == 0U)
  80011da:	e010      	b.n	80011fe <HAL_RCC_OscConfig+0x2ba>
  80011dc:	40021000 	.word	0x40021000
- 80011e0:	080020ac 	.word	0x080020ac
+ 80011e0:	080020b4 	.word	0x080020b4
  80011e4:	20000000 	.word	0x20000000
  80011e8:	20000004 	.word	0x20000004
         {
@@ -4315,7 +4315,7 @@ HAL_StatusTypeDef HAL_RCC_ClockConfig(RCC_ClkInitTypeDef  *RCC_ClkInitStruct, ui
  8001932:	bf00      	nop
  8001934:	40022000 	.word	0x40022000
  8001938:	40021000 	.word	0x40021000
- 800193c:	080020ac 	.word	0x080020ac
+ 800193c:	080020b4 	.word	0x080020b4
  8001940:	20000000 	.word	0x20000000
  8001944:	20000004 	.word	0x20000004
 
@@ -4520,7 +4520,7 @@ uint32_t HAL_RCC_GetSysClockFreq(void)
  8001a4c:	4770      	bx	lr
  8001a4e:	bf00      	nop
  8001a50:	40021000 	.word	0x40021000
- 8001a54:	080020bc 	.word	0x080020bc
+ 8001a54:	080020c4 	.word	0x080020c4
  8001a58:	00f42400 	.word	0x00f42400
  8001a5c:	007a1200 	.word	0x007a1200
 
@@ -5586,10 +5586,10 @@ HAL_StatusTypeDef HAL_TIMEx_MasterConfigSynchronization(TIM_HandleTypeDef *htim,
  8002056:	4798      	blx	r3
  8002058:	3601      	adds	r6, #1
  800205a:	e7f2      	b.n	8002042 <__libc_init_array+0x1e>
- 800205c:	080020ec 	.word	0x080020ec
- 8002060:	080020ec 	.word	0x080020ec
- 8002064:	080020ec 	.word	0x080020ec
- 8002068:	080020f0 	.word	0x080020f0
+ 800205c:	080020f4 	.word	0x080020f4
+ 8002060:	080020f4 	.word	0x080020f4
+ 8002064:	080020f4 	.word	0x080020f4
+ 8002068:	080020f8 	.word	0x080020f8
 
 0800206c <memset>:
  800206c:	4402      	add	r2, r0
